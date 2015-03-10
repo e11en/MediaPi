@@ -1,0 +1,25 @@
+Start video on raspi:
+exec xterm -fullscreen -fg black -bg black -e -s omxplayer http://192.168.1.166:8888
+
+command start torrent streamer:
+peerflix [torrentfile] --port 8888 --subtitles {subtitle file} --remove --quiet {--on-listening /usr/local/bin/start-player}
+
+execute command in other terminal:
+ttyecho -n /dev/pts/{1} [command]
+
+"magnet:?xt=urn:btih:SJ4DX6NRO5CDE3CLDL2OLWCTEYRUFWQU&dn=Game.of.Thrones.S01E01.HDTV.XviD-FEVER&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.publicbt.com:80&tr=udp://tracker.istole.it:80&tr=udp://open.demonii.com:80&tr=udp://tracker.coppersurfer.tk:80"
+
+
+ttyecho -n /dev/pts/2 exec xterm -fullscreen -fg black -bg black -e -s omxplayer http://192.168.1.166:8888
+
+
+
+
+
+
+
+
+
+
+TIP:
+uitbreiding naar andere torrent sites, filter forbidden words uit de titles zoals divx, dvdrip, cam etc.

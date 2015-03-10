@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script>
+    function showOverlay(id)
+    {
+        document.getElementById('ov' + id).style.display = 'block';
+    }
+
+    function hideOverlay(id)
+    {
+        document.getElementById('ov' + id).style.display = 'none';
+    }
+
+    $( document ).ready(function() {
+        loadMore();
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+
+<script>
+    var pageNR = 1;
+
+    function loadMore() {
+        showLoading();
+        $.ajax({
+            url: '/more_items',
+            data: { page: pageNR, type: '{{ page }}' },
+            type: 'POST',
+            success: function(response) {
+                pageNR = pageNR + 1;
+                $('.loadMoreDiv').remove();
+                addItems(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function addItems(data)
+    {
+        var temp = $.parseJSON(data);
+        $.each(temp, function(i, item){
+            temp = '<a href="/{{ page }}/' + item.imdb + '">' +
+                '<div class="item"  id="' + item.imdb + '" onmouseover="showOverlay(this.id)" onmouseout="hideOverlay(this.id)">' +
+                '<div class="container"><div class="overlay" id="ov' + item.imdb + '"></div>' +
+                '<div class="poster"><img src="' + item.poster + '"></div>' +
+                '<div class="title">' + item.title + '</div>' +
+                '<div class="year">' + item.year + '</div>' +
+                '</div></div></a>';
+            $('#all-items').append(temp);
+        });
+        showLoadMore();
+    }
+
+    function showLoadMore()
+    {
+        var loadMore = '<div onclick="loadMore();" class="loadMoreDiv">' +
+            '<div class="item"  id="loadmore" onmouseover="showOverlay(this.id)" onmouseout="hideOverlay(this.id)">' +
+            '<div class="container"><div class="overlay" id="ovloadmore"></div><div class="poster">' +
+            '<button id="btnNext" class="next-page btn" onclick="loadMovies();">MORE</button>' +
+            '<button id="btnLoad" class="next-page btn gifLoader" onclick="loadMovies();" style="display: none">' +
+            '<img id="loadGif" src="{{ url_for('static', filename='loader.gif') }}"></button>' +
+            '</div></div></div></div>';
+
+        $('#all-items').append(loadMore);
+    }
+
+    function showLoading()
+    {
+        $('#btnNext').hide();
+        $('#btnLoad').show();
+    }
+</script>
+
+<div id="all-items">
+    <div onclick="loadMore();" class="loadMoreDiv">
+        <div class="item"  id="loadmore" onmouseover="showOverlay(this.id)" onmouseout="hideOverlay(this.id)">
+            <div class="container"><div class="overlay" id="ovloadmore"></div>
+                <div class="poster">
+                    <button id="btnLoad" class="next-page btn gifLoader" onclick="loadMovies();" style="display: block">
+                        <img id="loadGif" src="{{ url_for('static', filename='loader.gif') }}" >
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

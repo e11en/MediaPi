@@ -1,0 +1,308 @@
+@font-face {
+	font-family: Segoe UI;
+	src: url('segoeui.ttf');
+}
+
+body{
+    font-family: 'Segoe UI';
+    color: #fff;
+    background-color: #242424;
+    margin: 1em 1em 2em 1em;
+}
+
+/* TOP BAR */
+#top-bar{
+    z-index:1001;
+    position:fixed;
+    top: 0;
+    padding-bottom: 2px;
+}
+
+#main-title
+{
+  width: 7.2em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0.5em;
+}
+
+/* MENU */
+#top-bar {
+    background-color: #242424;
+    width: 100%;
+}
+
+#top-bar ul{
+    margin:0 auto;
+    padding:0;
+    width:100%;
+    display:block;
+}
+
+#top-bar li{
+    margin:0 0.5em;
+    list-style:none;
+    display:inline;
+}
+
+#top-bar li.active a{
+    border-bottom: 3px solid #207cca;
+    color: #fff;
+}
+
+nav {
+    margin-bottom: 10px;
+}
+
+nav a {color: #838383;}
+a {color: #FFF;}
+a:hover {text-decoration: none; color: #fff;}
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+
+/* CONTENT */
+#content{
+    margin-top: 6em;
+   /* padding: 0 0.5em;*/
+}
+
+.btn{
+    border: 0;
+    padding: 1em 2em;
+    color: #fff;
+    background-color: #223a5e;
+}
+
+.btn:hover{
+    background-color: #33496b;
+    cursor: pointer;
+}
+
+.display-no{
+    display: none;
+}
+
+/* GRID PAGE */
+#all-items{
+    padding: 1em 0;
+}
+
+#all-items:after{
+    clear: both;
+    content: "";
+    display: block;
+}
+
+.item{
+    float: left;
+    margin: 0 0.5em 0.5em 0;
+    width: 154px;
+}
+
+.item:hover{
+    cursor: pointer;
+}
+
+.item .poster img{
+    height: 231px;
+}
+
+.item .poster{
+    max-width: 154px;
+    overflow: hidden;
+}
+
+.item .overlay{
+    display: none;
+    width: 154px;
+    height: 231px;
+    background-color: black;
+    z-index:1;
+    -moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);
+    position: absolute;
+}
+
+.item .title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    width: 154px;
+}
+
+.item .year{
+    font-size: 0.7em;
+    color: #8b8b8b;
+}
+
+.loadMoreDiv .poster{
+    background-image: url("loadMore.png");
+    width: 154px;
+    height: 231px;
+}
+
+.loadMoreDiv .next-page{
+    margin-top: 50%;
+    margin-left: Calc((50%) - 3.5em);
+}
+
+#loadGif{
+    height: 3em;
+    width: 3em;
+}
+
+.gifLoader{
+    padding: 0 2em;
+    display: none;
+}
+
+/* SINGLE MOVIE PAGE */
+
+#single-movie{
+    padding: 0 2em;
+}
+
+#single-movie #poster{
+    margin: 0 2em 0 0;
+    float: left;
+}
+
+#single-movie #title{
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+#single-movie span{
+    font-size: 0.9em;
+    margin-right: 1em;
+}
+
+#single-movie button{
+    margin-right: 2em;
+}
+
+/* SINGLE TV SHOW */
+#single-show table{
+    width: 100%;
+}
+
+#banner{
+    width: 100%;
+}
+
+#episodes{
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-right: 0;
+    width: auto;
+}
+
+#single-show table{
+    border-collapse: collapse;
+}
+
+.tbl-clickable{
+    cursor: pointer;
+}
+
+.tbl-alternate table tr:nth-child(odd){
+    background-color: #34363a;
+}
+
+.highlight{
+    background-color: #223a5e!important;
+}
+
+/* REMOTE */
+#remote div{
+    float: left;
+
+}
+
+.remoteBtn{
+    text-align: center;
+    color: #fff;
+    background-color: #223a5e;
+    padding: 0 0 0.2em 0;
+    width: 4em;
+    font-size: 2em;
+}
+
+.remoteBtn:hover{
+    background-color: #33496b;
+    cursor: pointer;
+}
+
+#stop, #sub-smaller{
+    clear: both;
+}
+
+.smaller-font{
+    font-size: 0.8em;
+}
+
+.larger-font{
+    /*font-size: 1.2em;*/
+}
+
+/* SEARCH BAR */
+#search {
+    width: 100%;
+}
+
+#keywords {
+    width: Calc((100%) - 100px);
+    padding:2px 5px;
+    background:rgba(50, 50, 50, 0.2);
+    border:4px solid #207cca;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+#btnSearch {
+    position:relative;
+    padding:1px 10px;
+    border:4px solid #207cca;
+    background-color:#207cca;
+    color: #fff;
+    font-size: 1.5em;
+}
+
+.arrow {
+	position: relative;
+	background: #207cca;
+	border: 0; 
+    left: -8px;
+}
+.arrow:after, .arrow:before {
+	right: 100%;
+	top: 40%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.arrow:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-right-color: #207cca;
+	border-width: 10px;
+	margin-top: -10px;
+}
+
+:invalid {
+  box-shadow: none;
+}
+
+:-moz-submit-invalid {
+  box-shadow: none;
+}
+
+:-moz-ui-invalid {
+  box-shadow:none;
+}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script>
+    $( document ).ready(function() {
+        switchMenuItem('youtube');
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+
+YouTube
+
+<br><br>
+
+{{ data }}
+
+{% endblock %}

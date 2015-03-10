@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script>
+    $( document ).ready(function() {
+        switchMenuItem('movies');
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+
+<div id="single-movie">
+<table>
+    <tr>
+        <td rowspan="3"><img id="poster" src="{{ data.poster }}"></td>
+    </tr>
+    <tr>
+        <td valign="top">
+            <span id="title">{{ data.title }}</span>
+            <p>
+                <span>{{ data.year }}</span>
+                <span>{{ data.runtime }} min</span>
+                <span>{{ data.genre }}</span>
+            </p>
+            <p>{{ data.overview }}</p>
+        </td>
+    </tr>
+    <tr>
+        <td valign="bottom">
+            <button class="btn">Watch Now</button>
+
+            {% for item in data.quality %}
+                <span>{{ item }}</span>
+            {% endfor %}
+        </td>
+    </tr>
+</table>
+
+
+
+
+</div>
+
+
+{% endblock %}

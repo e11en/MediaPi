@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script>
+    $( document ).ready(function() {
+        switchMenuItem('settings');
+    });
+</script>
+
+{% endblock %}
+
+
+{% block body %}
+
+{% if error %}
+Username en/of password is niet juist
+{% elif username %}
+Account is gekoppeld met Trakt.tv
+{% endif %}
+
+
+<form method="post" action="{{ url_for('trakt_login') }}">
+    <label>Username:</label>
+    <input type="text" name="username" required value="{{ username }}{{ error }}">
+
+    <label>Password:</label>
+    <input type="password" name="password" required value="{{ username }}{{ error }}">
+
+    <input type="submit">
+</form>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script>
+    $( document ).ready(function() {
+        switchMenuItem('remote');
+        $("#play").addClass("display-no");
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+<script>
+    function switchPlayPause()
+    {
+        $("#play").toggleClass("display-no");
+        $("#pause").toggleClass("display-no");
+    }
+
+    function sendButton(btn) {
+        if(btn == "play-pause") switchPlayPause();
+
+        $.ajax({
+            url: '/remote_key',
+            data: { key: btn },
+            type: 'POST',
+            success: function(response) {
+                $('#keyPressed').text(response);
+                if(response == "stop")
+                {
+                    history.back();
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
+pressed: <span id="keyPressed"></span>
+
+<div id="remote">
+    <div class="remoteBtn" id="backward" onclick="sendButton('backward');">
+        <i class="fa fa-backward"></i>
+    </div>
+    <div class="remoteBtn largeBtn" id="play-pause" onclick="sendButton('play-pause');">
+        <i class="fa fa-play" id="play"></i>
+        <i class="fa fa-pause" id="pause"></i>
+    </div>
+    <div class="remoteBtn" id="forward" onclick="sendButton('forward');">
+        <i class="fa fa-forward"></i>
+    </div>
+    <div class="remoteBtn" id="stop" onclick="sendButton('stop');">
+        <i class="fa fa-stop"></i>
+    </div>
+    <div class="remoteBtn" id="sub-lang" onclick="sendButton('sub-lang');">
+        <i class="fa fa-comment"></i>
+    </div>
+    <div class="remoteBtn" id="sound" onclick="sendButton('sound');">
+        <i class="fa fa-volume-up"></i>
+        <!-- add bar sound control -->
+    </div>
+    <div class="remoteBtn" id="sub-smaller" onclick="sendButton('sub-smaller');">
+        <i class="smaller-font">A</i>
+    </div>
+    <div class="remoteBtn" id="sub-larger" onclick="sendButton('sub-larger');">
+        <i class="larger-font">A</i>
+    </div>
+</div>
+
+{% endblock %}

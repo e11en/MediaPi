@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script>
+    $( document ).ready(function() {
+        switchMenuItem('shows');
+
+        $("#tbl-episodes tr").click(function() {
+            var selected = $(this).hasClass("highlight");
+            $("#tbl-episodes tr").removeClass("highlight");
+            if(!selected)
+                    $(this).addClass("highlight");
+        });
+
+        $("#tbl-seasons tr").click(function() {
+            var selected = $(this).hasClass("highlight");
+            $("#tbl-seasons tr").removeClass("highlight");
+            if(!selected)
+                    $(this).addClass("highlight");
+        });
+    });
+</script>
+
+<script>
+    function playTorrent(link) {
+        $.ajax({
+            url: '/play',
+            data: { torrent: link },
+            type: 'POST',
+            success: function(response) {
+                window.location = response;
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
+{% endblock %}
+
+{% block body %}
+
+<div id="single-show">
+    <table>
+        <th colspan="2"><span id="title">{{ data.title }}</span></th>
+        <tr>
+            <td valign="top" colspan="2"><img id="banner" src="{{ data.banner }}"></td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <div id="seasons" class="tbl-alternate">
+                    <span>Seasons</span>
+                    <table id="tbl-seasons" class="tbl-clickable">
+                        {% for s in range(data.num_seasons) %}
+                        {% if s == 0 %}
+                        <tr class="highlight">
+                        {% else %}
+                        <tr>
+                        {% endif %}
+                            <td>Season {{ s+1 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </td>
+            <td valign="top">
+                <div id="episodes" class="tbl-alternate">
+                    <span>Episodes</span>
+                    <table id="tbl-episodes" class="tbl-clickable">
+                        {% for episode in data.episodes %}
+                        <tr>
+                            <td>{{ episode.season }}.{{ episode.episode }}</td>
+                            <td>{{ episode.title }}</td>
+                            <td><button onclick="playTorrent('{{episode.torrent }}');" class="btn" style="float:right">PLAY</button></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+{% endblock %}
